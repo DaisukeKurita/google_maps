@@ -1,0 +1,8 @@
+<h2>日記一覧</h2>
+
+<%# 省略 %>
+
+<%# 【data: {turbolinks: false}】の記述によりAPIの再読み込むを防ぐ %>
+<%# 記述が無いと【JavaScript】のエラーが発生する↓ %>
+<%# 【エラー内容】<%# You have included the Google Maps JavaScript API multiple times on this page. This may cause unexpected errors. %>
+<%= link_to '日記新規投稿へ', new_diary_path, data: {turbolinks: false} %>

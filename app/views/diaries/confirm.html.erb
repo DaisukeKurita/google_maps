@@ -1,0 +1,46 @@
+<h2>日記新規投稿確認画面</h2>
+
+<%= form_with(model: @diary, local: true) do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title, disabled: true %>
+  </div>
+
+  <div>
+    <%= form.label :content %>
+    <%= form.text_area :content, disabled: true %>
+  </div>
+
+  <div>
+    <%= form.label :address %>
+    <%= form.text_field :address, disabled: true %>
+  </div>
+
+  <%= form.hidden_field :title %>
+  <%= form.hidden_field :content %>
+  <%= form.hidden_field :address %>
+
+  <%# @diary.addressが存在する場合のみ地図が表示される %>
+  <% if @diary.address.present? %>
+    <div id='map' style='height: 600px; width: 600px;' ></div>
+
+    <script>
+      const lat_lng = {lat: gon.lat_lng[0], lng: gon.lat_lng[1]};
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById('map'), {
+          center: lat_lng,
+          zoom: 9,
+        });
+        var marker = new google.maps.Marker({
+          position: lat_lng,
+          map: map
+        });
+      }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
+  <% end %>
+
+  <%= form.submit %>
+  <%= form.submit '戻る', name: 'back' %>
+<% end %>
