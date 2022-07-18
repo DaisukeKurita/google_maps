@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: 'diaries#index'
+  # 追加
+  resources :diaries do
+    post 'confirm', on: :collection
+  end
 end

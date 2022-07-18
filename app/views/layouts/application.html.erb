@@ -3,9 +3,13 @@
   <head>
     <title>GoogleMaps</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%# 「include_gon(init: true)」を追加 %>
+    <%# 【(init: true)】を記述する事により、『リクエストごとにwindow.gon = {};を初期化』 %>
+    <%# 記述が無いと『日記新規投稿画面』で【JavaScript】のエラーが発生する↓ %>
+    <%# 【エラー内容】Uncaught (in promise) ReferenceError: gon is not defined %>
+    <%= include_gon %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
